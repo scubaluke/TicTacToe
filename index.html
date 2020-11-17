@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="./funStyle.css">
+</head>
+<body>
+    <!-- <label class="players"  for="players">
+        <select name="players" id="players">
+            <option value="multi">Two Player</option>
+            <option value="one">Single Player</option>
+        </select>
+    </label> -->
+
+    <div class="fill"></div>
+    <div class="wrapper">
+    <div class="container">
+<div id="board" class="board">
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+</div>
+</div>
+</div>
+<div class="questionPopUp show">
+    <div class="player"></div>
+<h1 class="questionText">This is a positive statement you use to get through struggles</h1>
+<div class="customSelect"> 
+<select class="answerDropDown" name="answer" id="">
+    <option disabled selected>Select</option>
+    <option value='Perspective'>Perspective</option>
+    <option value='Agency'>Agency</option>
+    <option value=Purpose>Purpose</option>
+    <option value='Growth mindset'>Growth mindset</option>
+    <option value='Emotions'>Emotions</option>
+    <option value='Goals'>Goals</option>
+    <option value='Values'>Values</option>
+    <option value='Teamwork'>Teamwork</option>
+    <option value='Critical Thinking'>Critical Thinking</option>
+</select>
+</div>
+    <button class="answerBtn">Answer</button>
+    <h2 class="tryAgain"></h2>
+</div>
+
+
+<div class="winningMessage" id="winningMessage">
+    <div data-winning-message-text></div>
+    <button id="restart">Play Again</button>
+</div>
+
+    <script src="./index.js"></script>
+</body>
+</html>

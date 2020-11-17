@@ -1,6 +1,6 @@
 const xClass = 'x';
 const circleClass = 'circle';
-let circleTurn
+let circleTurn 
 
 const winningCombos = [
     [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]
@@ -10,6 +10,8 @@ const cellElements = document.querySelectorAll('[data-cell]')
 const board = document.querySelector('#board')
 const winningMessageText = document.querySelector('[data-winning-message-text]')
 const winningMessageElement = document.querySelector('#winningMessage')
+
+let pickedQuestions;
 
 function startGame() {
     circleTurn = false;
@@ -21,6 +23,8 @@ function startGame() {
     })
     setBoardHoverClass()
     winningMessageElement.classList.remove('show')
+    pickedQuestions = [];
+    //  askQuestion()
 }
 startGame()
 
@@ -36,7 +40,7 @@ placeMark(cell, currentClass)
        } else if (isDraw()) {
            endGame(true)
        } else {
-//switch turns
+        //switch turns
         swapTurns()
         setBoardHoverClass()
        }
@@ -61,6 +65,7 @@ function placeMark(cell, currentClass) {
 }
 function swapTurns(){
     circleTurn = !circleTurn
+    return askQuestion()
 }
 function setBoardHoverClass() {
     board.classList.remove(xClass);
@@ -72,4 +77,67 @@ function checkWin(currentClass) {
         return cellElements[index].classList.contains(currentClass)
     })})
 }
-restartButton.addEventListener('click', startGame)
+function setBackground() {
+    const randomColor = Math.floor(Math.random()*16777215).toString(16);
+  const background = document.querySelector('.fill')
+    background.style.backgroundColor = `#${randomColor}`;
+  }
+
+  restartButton.addEventListener('click', startGame)
+  restartButton.addEventListener("click", setBackground);
+  setBackground();
+
+/******** PRE GAME QUESTIONS ************************************************/
+const answerBtn = document.querySelector('.answerBtn')
+let playerText = document.querySelector('.player')
+const questionPopUp = document.querySelector('.questionPopUp')
+const questionText = document.querySelector('.questionText')
+const tryAgain = document.querySelector('.tryAgain');
+let questionIndex = 0;
+
+const questions = [
+ { answer: 'Perspective', question:  `This is a positive statement you use to get through struggles (Perspective)`},
+   {answer:'Emotions',question: `This is a positive statement you use... Emotions`}, 
+   {answer:'Agency',question:  `This is a positive statement you use... Agency`},                        
+   {answer:'Growth mindset',question:  `This is a positive statement you use... Growth mindset`},
+    {answer:'Teamwork',question:  `This is a positive statement you use... Teamwork` },                      
+     {answer:'Goals',question: `This is a positive statement you use... Goals`},
+   {answer:'Values',question:  `This is a positive statement you use... Values` },                                                   
+    {answer:'Critical Thinking',question:  `This is a positive statement you use... 'Critical Thinking'`},
+   {answer:'Purpose',question:  `This is a positive statement you use...Purpose`},
+];
+function pickQuestion() {
+    const questionI = Math.floor(Math.random() * questions.length)
+    if ((pickedQuestions.includes(questionI))) {
+        console.log('prev picked', questions[questionIndex].question);
+       return pickQuestion()
+    } else{
+        console.log(questionI ,questions[questionI].question);
+        pickedQuestions.push(questionI)
+        return questionIndex = questionI
+    }
+}
+
+function askQuestion() {
+    pickQuestion() 
+    questionText.innerText = questions[questionIndex].question
+    questionPopUp.classList.add('show')
+    tryAgain.textContent = ''
+    circleTurn ? playerText.innerText = `Player: O's` :  playerText.innerText = `player: X's`
+}
+
+function checkAnswer() {
+    const answerDropDown = document.querySelector('.answerDropDown').value;
+
+    if (questions[questionIndex].answer == answerDropDown) {
+        questionPopUp.classList.remove('show')
+    } else {
+       return tryAgain.textContent = 'Not quite, try again.'
+    }
+}
+
+askQuestion()
+
+answerBtn.addEventListener('click',checkAnswer)
+restartButton.addEventListener('click', askQuestion)
+
