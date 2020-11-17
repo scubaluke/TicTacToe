@@ -94,17 +94,18 @@ const questionPopUp = document.querySelector('.questionPopUp')
 const questionText = document.querySelector('.questionText')
 const tryAgain = document.querySelector('.tryAgain');
 let questionIndex = 0;
+let wrongAnswerCount = 0;
 
 const questions = [
- { answer: 'Perspective', question:  `This is a positive statement you use to get through struggles (Perspective)`},
-   {answer:'Emotions',question: `This is a positive statement you use... Emotions`}, 
-   {answer:'Agency',question:  `This is a positive statement you use... Agency`},                        
-   {answer:'Growth mindset',question:  `This is a positive statement you use... Growth mindset`},
-    {answer:'Teamwork',question:  `This is a positive statement you use... Teamwork` },                      
-     {answer:'Goals',question: `This is a positive statement you use... Goals`},
-   {answer:'Values',question:  `This is a positive statement you use... Values` },                                                   
-    {answer:'Critical Thinking',question:  `This is a positive statement you use... 'Critical Thinking'`},
-   {answer:'Purpose',question:  `This is a positive statement you use...Purpose`},
+ { answer: 'Perspective', question:  `This is a positive statement you use to get through struggles (Perspective)`, hint: 'think about .... Perspective'},
+   {answer:'Emotions',question: `This is a positive statement you use... Emotions`, hint: 'think about .... Emotions'}, 
+   {answer:'Agency',question:  `This is a positive statement you use... Agency`, hint: 'think about .... Agency'},                        
+   {answer:'Growth mindset',question:  `This is a positive statement you use... Growth mindset`, hint: 'think about .... Growth mindset'},
+    {answer:'Teamwork',question:  `This is a positive statement you use... Teamwork`, hint: 'think about .... Teamwork' },                      
+     {answer:'Goals',question: `This is a positive statement you use... Goals`, hint: 'think about .... Goals'},
+   {answer:'Values',question:  `This is a positive statement you use... Values`, hint: 'think about .... Values' },                                                   
+    {answer:'Critical Thinking',question:  `This is a positive statement you use... Critical Thinking`, hint: 'think about .... Critical Thinking'},
+   {answer:'Purpose',question:  `This is a positive statement you use...Purpose`, hint: 'think about .... Purpose'},
 ];
 function pickQuestion() {
     const questionI = Math.floor(Math.random() * questions.length)
@@ -122,17 +123,31 @@ function askQuestion() {
     pickQuestion() 
     questionText.innerText = questions[questionIndex].question
     questionPopUp.classList.add('show')
+    wrongAnswerCount = 0;
     tryAgain.textContent = ''
     circleTurn ? playerText.innerText = `Player: O's` :  playerText.innerText = `player: X's`
 }
 
 function checkAnswer() {
     const answerDropDown = document.querySelector('.answerDropDown').value;
+    console.log('checkAnswer start', wrongAnswerCount);
 
     if (questions[questionIndex].answer == answerDropDown) {
         questionPopUp.classList.remove('show')
     } else {
-       return tryAgain.textContent = 'Not quite, try again.'
+                //    tryAgain.textContent = 'Not quite, try again.'}
+
+        if (wrongAnswerCount <= 1) {
+            wrongAnswerCount += 1;
+             tryAgain.textContent = 'Not quite, try again.'
+        }else if (wrongAnswerCount <= 2) {
+            console.log(wrongAnswerCount);
+             tryAgain.textContent = 'Close, try again.'
+    }  else if (wrongAnswerCount <= 3) {
+        wrongAnswerCount += 1;
+        console.log('questionIndex', questionIndex);
+         tryAgain.textContent = questions[questionIndex].hint
+        }
     }
 }
 
@@ -140,4 +155,3 @@ askQuestion()
 
 answerBtn.addEventListener('click',checkAnswer)
 restartButton.addEventListener('click', askQuestion)
-
