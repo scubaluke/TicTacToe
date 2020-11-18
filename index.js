@@ -11,6 +11,20 @@ const board = document.querySelector('#board')
 const winningMessageText = document.querySelector('[data-winning-message-text]')
 const winningMessageElement = document.querySelector('#winningMessage')
 
+/******* Single or Multi players *******************/
+const choosePlayersAndGame = document.querySelector('.choosePlayersAndGame')
+const choosePlayersAndGameBtn = document.querySelector('#startGame')
+choosePlayersAndGameBtn.addEventListener('click', playersAndGameChosen)
+function askPlayerNum() {
+    choosePlayersAndGame.classList.add('show')
+}
+
+function playersAndGameChosen() {
+    choosePlayersAndGame.classList.remove('show')
+    askQuestion()
+}
+
+/******   Run Game    **********/
 let pickedQuestions;
 
 function startGame() {
@@ -24,26 +38,88 @@ function startGame() {
     setBoardHoverClass()
     winningMessageElement.classList.remove('show')
     pickedQuestions = [];
-    //  askQuestion()
+    choosePlayersAndGame.classList.add('show')
+
 }
 startGame()
 
+/********   PLAY against COMPUTER *********/ 
+function computersMove() {    
+    const thinkingText = document.querySelector('.thinking')
+    const squares = [...cellElements];
+    const numToMove =  Math.floor(Math.random()*9)
+    const move = squares[numToMove]
+
+        if (move.classList.contains('x') || move.classList.contains('circle')) {
+        computersMove(circleTurn)
+    } else {
+        const wait = (amount = 0) => new Promise(resolve => setTimeout(resolve, amount))
+        thinkingText.classList.add('show')
+
+       async function play(move) {
+           const thinking = (Math.random()*1000) +500;
+            await wait(thinking)
+            move.classList.add('circle')
+            if (checkWin(circleClass)) {
+                endGame(false)
+                thinkingText.classList.remove('show')
+
+            } else if (checkWin(xClass)) {
+                endGame(false)
+                thinkingText.classList.remove('show')
+
+             // check for draw
+            } else if (isDraw()) {
+                       endGame(true)
+                   } else {
+            //switch turns
+                    swapTurns()
+                    setBoardHoverClass()
+                    thinkingText.classList.remove('show')
+          }
+       }
+       play(move)
+    }
+    questionPopUp.classList.add('show')
+
+}
 function handleClick(e) {
+    const selectPlayers = document.querySelector('#players').value
+    console.log(selectPlayers);
+
     const cell = e.target;
     const currentClass = circleTurn ? circleClass : xClass;
-   // place mark
-placeMark(cell, currentClass)
-   //check for win
-   if (checkWin(currentClass)) {
-        endGame(false)
-         // check for draw
-       } else if (isDraw()) {
-           endGame(true)
-       } else {
-        //switch turns
-        swapTurns()
-        setBoardHoverClass()
-       }
+
+    if (selectPlayers === 'multi') {
+        // place mark
+     placeMark(cell, currentClass)
+        //check for win
+        if (checkWin(currentClass)) {
+             endGame(false)
+              // check for draw
+            } else if (isDraw()) {
+                endGame(true)
+            } else {
+     //switch turns
+             swapTurns()
+             setBoardHoverClass()
+            }
+    } else if (selectPlayers === 'single' && currentClass == 'x') {
+        placeMark(cell, currentClass)
+
+        if (checkWin(currentClass)) {
+            endGame(false)
+             // check for draw
+           } else if (isDraw()) {
+               endGame(true)
+           } else {
+    //switch turns
+            swapTurns()
+            setBoardHoverClass()
+            computersMove(currentClass)
+            questionPopUp.classList.remove('show')
+        }
+    }
 }
 function isDraw() {
     return [...cellElements].every(cell => { 
@@ -54,6 +130,7 @@ function isDraw() {
 function endGame(draw) {
     if(draw){
         winningMessageText.innerText = `Game was a draw!`
+        
     } else {
         winningMessageText.innerText = `${circleTurn ? "O's" : "X's"} Wins!`
     }
@@ -89,12 +166,13 @@ function setBackground() {
 
 /******** PRE GAME QUESTIONS ************************************************/
 const answerBtn = document.querySelector('.answerBtn')
-let playerText = document.querySelector('.player')
+let playerText = document.querySelector('.whosTurn')
 const questionPopUp = document.querySelector('.questionPopUp')
 const questionText = document.querySelector('.questionText')
 const tryAgain = document.querySelector('.tryAgain');
 let questionIndex = 0;
 let wrongAnswerCount = 0;
+const chooseGameAndPlayers = document.querySelector('.choosePlayersAndGame')
 
 const questions = [
  { answer: 'Perspective', question:  `This is a positive statement you use to get through struggles (Perspective)`, hint: 'think about .... Perspective'},
@@ -110,10 +188,8 @@ const questions = [
 function pickQuestion() {
     const questionI = Math.floor(Math.random() * questions.length)
     if ((pickedQuestions.includes(questionI))) {
-        console.log('prev picked', questions[questionIndex].question);
        return pickQuestion()
     } else{
-        console.log(questionI ,questions[questionI].question);
         pickedQuestions.push(questionI)
         return questionIndex = questionI
     }
@@ -130,28 +206,44 @@ function askQuestion() {
 
 function checkAnswer() {
     const answerDropDown = document.querySelector('.answerDropDown').value;
-    console.log('checkAnswer start', wrongAnswerCount);
 
     if (questions[questionIndex].answer == answerDropDown) {
         questionPopUp.classList.remove('show')
     } else {
-                //    tryAgain.textContent = 'Not quite, try again.'}
-
         if (wrongAnswerCount <= 1) {
             wrongAnswerCount += 1;
              tryAgain.textContent = 'Not quite, try again.'
         }else if (wrongAnswerCount <= 2) {
-            console.log(wrongAnswerCount);
              tryAgain.textContent = 'Close, try again.'
     }  else if (wrongAnswerCount <= 3) {
         wrongAnswerCount += 1;
-        console.log('questionIndex', questionIndex);
          tryAgain.textContent = questions[questionIndex].hint
         }
     }
 }
 
-askQuestion()
-
 answerBtn.addEventListener('click',checkAnswer)
-restartButton.addEventListener('click', askQuestion)
+restartButton.addEventListener('click', askPlayerNum)
+
+/*******  CSS  TRANSITION ANIMATION HELPER function ************ */
+
+// var display = function (elem) {
+
+// 	// Get the natural height of the element
+// 	var getHeight = function () {
+// 		elem.style.display = 'block'; // Make it visible
+// 		var height = elem.scrollHeight + 'px'; // Get it's height
+// 		elem.style.display = ''; //  Hide it again
+// 		return height;
+// 	};
+
+// 	var height = getHeight(); // Get the natural height
+// 	elem.classList.add('is-visible'); // Make the element visible
+// 	elem.style.height = height; // Update the max-height
+
+// 	// Once the transition is complete, remove the inline max-height so the content can scale responsively
+// 	window.setTimeout(function () {
+// 		elem.style.height = '';
+// 	}, 350);
+
+// };

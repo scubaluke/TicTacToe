@@ -7,12 +7,9 @@
     <link rel="stylesheet" href="./funStyle.css">
 </head>
 <body>
-    <!-- <label class="players"  for="players">
-        <select name="players" id="players">
-            <option value="multi">Two Player</option>
-            <option value="one">Single Player</option>
-        </select>
-    </label> -->
+    <div class="thinking ">
+        <h1 >Computer Thinking...</h1>
+</div>
 
     <div class="fill"></div>
     <div class="wrapper">
@@ -30,8 +27,35 @@
 </div>
 </div>
 </div>
-<div class="questionPopUp show">
-    <div class="player"></div>
+
+<div class="choosePlayersAndGame show">
+    
+    <div class="customSelect" > 
+    <label class="players"  for="players">
+        <h3>Players</h3>
+        <select  name="players" id="players">
+            <option value="multi">Two Player</option>
+            <option value="single">Single Player</option>
+        </select>
+    </label>
+</div>
+
+    <div class="customSelect" > 
+      <label for="game" class="gameToPlay">
+          <h3>Game:</h3>
+        <select name="game" id="">
+            <option value="emotion">Emotional Learning</option>
+            <!-- <option value="mathAddition">Addition</option>
+            <option value="mathSubtraction">Subtraction</option> -->
+         </select>
+         </label>
+    </div>
+    <button id="startGame">Play!</button>
+
+</div>
+
+<div class="questionPopUp">
+    <div class="whosTurn"></div>
 <h1 class="questionText">This is a positive statement you use to get through struggles</h1>
 <div class="customSelect"> 
 <select class="answerDropDown" name="answer" id="">
