@@ -21,6 +21,7 @@ function askPlayerNum() {
 
 function playersAndGameChosen() {
     choosePlayersAndGame.classList.remove('show')
+    findUserSelectedQuestions()
     askQuestion()
 }
 
@@ -85,8 +86,6 @@ function computersMove() {
 }
 function handleClick(e) {
     const selectPlayers = document.querySelector('#players').value
-    console.log(selectPlayers);
-
     const cell = e.target;
     const currentClass = circleTurn ? circleClass : xClass;
 
@@ -173,20 +172,72 @@ const tryAgain = document.querySelector('.tryAgain');
 let questionIndex = 0;
 let wrongAnswerCount = 0;
 const chooseGameAndPlayers = document.querySelector('.choosePlayersAndGame')
+/*******    SELECT QUESTIONS FOR GAME *****/
+const selectQuestions = document.querySelector('#questionsToAsk');
+let userSelectedQuestions = '';
 
-const questions = [
- { answer: 'Perspective', question:  `This is a positive statement you use to get through struggles (Perspective)`, hint: 'think about .... Perspective'},
-   {answer:'Emotions',question: `This is a positive statement you use... Emotions`, hint: 'think about .... Emotions'}, 
-   {answer:'Agency',question:  `This is a positive statement you use... Agency`, hint: 'think about .... Agency'},                        
-   {answer:'Growth mindset',question:  `This is a positive statement you use... Growth mindset`, hint: 'think about .... Growth mindset'},
-    {answer:'Teamwork',question:  `This is a positive statement you use... Teamwork`, hint: 'think about .... Teamwork' },                      
-     {answer:'Goals',question: `This is a positive statement you use... Goals`, hint: 'think about .... Goals'},
-   {answer:'Values',question:  `This is a positive statement you use... Values`, hint: 'think about .... Values' },                                                   
-    {answer:'Critical Thinking',question:  `This is a positive statement you use... Critical Thinking`, hint: 'think about .... Critical Thinking'},
-   {answer:'Purpose',question:  `This is a positive statement you use...Purpose`, hint: 'think about .... Purpose'},
-];
+function findUserSelectedQuestions() {
+return userSelectedQuestions  = selectQuestions.value;
+}
+choosePlayersAndGameBtn.addEventListener('change', findUserSelectedQuestions)
+const inputBoxType = {
+    emotion: 'dropDown',
+    subtraction: 'number',
+    addition: 'dropDown',
+}
+const questions = {
+    subtraction: [
+        { answer: 0, question: '1 - 1', hint: 'Think about 0 and why',},
+        { answer: 1, question: '2 - 1', hint: 'Think about 1',},
+        { answer: 0, question: '2 - 2', hint: 'Think about 0 and why.',},
+        { answer: 1, question: '3 - 2', hint: 'Think about 1 and why.',},
+        { answer: 3, question: '5 - 2', hint: 'Think about 3 and why.',},
+        { answer: 4, question: '6 - 2', hint: 'Think about 4 and why.',},
+        { answer: 3, question: '6 - 3', hint: 'Think about 3 and why.',},
+        { answer: 1, question: '5 - 4', hint: 'Think about 1 and why.',},
+        { answer: 4, question: '5 - 1', hint: 'Think about 4 and why.',},
+        ], 
+   addition: [
+        { answer: 2, question: '1 + 1', hint: 'Think about 2 and why.',},
+        { answer: 3, question: '2 + 1' , hint: 'Think about 3 and why.',},
+        { answer: 4, question: '2 + 2', hint: 'Think about 4 and why.',},
+        { answer: 5, question: '2 + 3' , hint: 'Think about 5 and why.',},
+        { answer: 6, question: '3 + 3', hint: 'Think about 6 and why.',},
+        { answer: 7, question: '3 + 4', hint: 'Think about 7 and why.',},
+        { answer: 8, question: '4 + 4', hint: 'Think about 8 and why.',},
+        { answer: 9, question: '5 + 4', hint: 'Think about 9 and why.',},
+        { answer: 10, question: '5 + 5', hint: 'Think about 1 and why.0',},
+       ],
+ emotion: [
+        { answer: 'Perspective', question:  `This is a positive statement you use to get through struggles (Perspective)`, hint: 'think about .... Perspective'},
+        {answer:'Emotions',question: `This is a positive statement you use... Emotions`, hint: 'think about .... Emotions'}, 
+        {answer:'Agency',question:  `This is a positive statement you use... Agency`, hint: 'think about .... Agency'},                        
+        {answer:'Growth mindset',question:  `This a really long one for testing purposes is a positive statement you use... Growth mindset`, hint: 'think about .... Growth mindset'},
+        {answer:'Teamwork',question:  `This is a positive statement you use... Teamwork`, hint: 'think about .... Teamwork' },                      
+        {answer:'Goals',question: `This is a positive statement you use... Goals`, hint: 'think about .... Goals'},
+        {answer:'Values',question:  `This is a positive statement you use... Values`, hint: 'think about .... Values' },                                                   
+        {answer:'Critical Thinking',question:  `This is a positive statement you use... Critical Thinking`, hint: 'think about .... Critical Thinking'},
+        {answer:'Purpose',question:  `This is a positive statement you use...Purpose`, hint: 'think about .... Purpose'},
+     ],
+}
+/*********  CREATING ANSWER DROP DOWN TEXT ******** */
+function generateAnswerDropdown() {
+    const answerDropDownText = document.querySelector('.generateAnswerDropDown');
+ if (inputBoxType[userSelectedQuestions] === 'number') {
+   return answerDropDownText.innerHTML = `<input type="number" name="" class="answerDropDown" max="99" id="numberInput"/>`
+ } else if (inputBoxType[userSelectedQuestions] === 'dropDown'){
+    let optionArray = []
+    questions[userSelectedQuestions].forEach(el =>  {
+    optionArray.push(` <option value='${el.answer}'>${el.answer}</option>`)
+   });
+   optionArray.unshift(`<select class="answerDropDown" name="answer" id="">`)
+   optionArray.push(`</select>`)
+      return answerDropDownText.innerHTML = optionArray;
+     }
+}
+
 function pickQuestion() {
-    const questionI = Math.floor(Math.random() * questions.length)
+    const questionI = Math.floor(Math.random() * questions[userSelectedQuestions].length)
     if ((pickedQuestions.includes(questionI))) {
        return pickQuestion()
     } else{
@@ -197,7 +248,8 @@ function pickQuestion() {
 
 function askQuestion() {
     pickQuestion() 
-    questionText.innerText = questions[questionIndex].question
+    generateAnswerDropdown()
+    questionText.innerText = questions[userSelectedQuestions][questionIndex].question
     questionPopUp.classList.add('show')
     wrongAnswerCount = 0;
     tryAgain.textContent = ''
@@ -207,17 +259,19 @@ function askQuestion() {
 function checkAnswer() {
     const answerDropDown = document.querySelector('.answerDropDown').value;
 
-    if (questions[questionIndex].answer == answerDropDown) {
+    if (questions[userSelectedQuestions][questionIndex].answer == answerDropDown) {
         questionPopUp.classList.remove('show')
-    } else {
+ } else {
         if (wrongAnswerCount <= 1) {
             wrongAnswerCount += 1;
              tryAgain.textContent = 'Not quite, try again.'
         }else if (wrongAnswerCount <= 2) {
+            wrongAnswerCount += 1;
              tryAgain.textContent = 'Close, try again.'
     }  else if (wrongAnswerCount <= 3) {
+
         wrongAnswerCount += 1;
-         tryAgain.textContent = questions[questionIndex].hint
+         tryAgain.textContent = questions[userSelectedQuestions][questionIndex].hint
         }
     }
 }

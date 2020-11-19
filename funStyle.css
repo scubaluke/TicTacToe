@@ -186,7 +186,7 @@ body {
 
   /* font-size: 5rem; */
 }
-/*******   PRE GAME QUESTION   *****************/
+/*******   PRE GAME QUESTION POPUP *****************/
 .whosTurn {
   color: rgb(0, 0, 0);
   font-size: 2em;
@@ -206,18 +206,24 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   color: white;
 
   /* font-size: 5rem; */
 }
+.questionText {
+  margin: 15px;
+}
 /* .answerDropDown */
 .tryAgain {
-  color: red;
   font-size: 2rem;
   margin-top: 20px;
+  color: rgb(255, 73, 73);
 }
 .show {
   display: flex;
+  z-index: 99;
+  overflow: auto;
   max-height: 999em;
 }
 .customSelect select {
@@ -229,13 +235,18 @@ body {
   box-shadow: 0 10px 50px rgba(201, 226, 255, 0.541);
   /* box-shadow: 60px -16px teal; */
 }
+#numberInput {
+  font-size: 2rem;
+  width: 4rem;
+  border-radius: 9px;
+  border: none;
+  box-shadow: 0px 5px 22px rgb(189, 189, 189);
+}
 
 .questionPopUp button {
-  display: inline-flex;
+  display: flex;
   text-align: center;
   margin-top: 20px;
-  /* margin: 80px; */
-  /* margin-bottom: 40px; */
   padding: 25px;
   border-radius: 50px;
   color: #000;
