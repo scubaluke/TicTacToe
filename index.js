@@ -15,6 +15,7 @@ const winningMessageElement = document.querySelector('#winningMessage')
 const choosePlayersAndGame = document.querySelector('.choosePlayersAndGame')
 const choosePlayersAndGameBtn = document.querySelector('#startGame')
 choosePlayersAndGameBtn.addEventListener('click', playersAndGameChosen)
+
 function askPlayerNum() {
     choosePlayersAndGame.classList.add('show')
 }
@@ -186,46 +187,61 @@ const inputBoxType = {
     addition: 'dropDown',
 }
 const questions = {
-    subtraction: [
-        { answer: 0, question: '1 - 1', hint: 'Think about 0 and why',},
-        { answer: 1, question: '2 - 1', hint: 'Think about 1',},
-        { answer: 0, question: '2 - 2', hint: 'Think about 0 and why.',},
-        { answer: 1, question: '3 - 2', hint: 'Think about 1 and why.',},
-        { answer: 3, question: '5 - 2', hint: 'Think about 3 and why.',},
-        { answer: 4, question: '6 - 2', hint: 'Think about 4 and why.',},
-        { answer: 3, question: '6 - 3', hint: 'Think about 3 and why.',},
-        { answer: 1, question: '5 - 4', hint: 'Think about 1 and why.',},
-        { answer: 4, question: '5 - 1', hint: 'Think about 4 and why.',},
+    game1: [
+        {question: 'What is another word for feelings?', answer: 'Emotions.', },
+        {question: 'What is a positive sentence you say to yourself?', answer: 'Self-Talk sentence.', },
+        {question: 'What do you call WHO you are?', answer: 'Your identity.', },
+        {question: 'What is the space around your body that you get to control?', answer: 'Your personal bubble.', },
+        {question: 'What is something you can do to calm your emotions?', answer: 'Deep breathing.', },
+        {question: 'How can you know how you are feeling?', answer: 'Listen to your body.', },
+        {question: 'When you are feeling emotions that are too much for you to handle on your own, what can you do?', answer: 'Get help from a trusted adult.', },
+        {question: 'What is something you write down that you want to accomplish and work hard to do?', answer: 'A goal.', },
+        {question: 'When you need something, what can you do?', answer: 'Ask for what you need.', },    
         ], 
-   addition: [
-        { answer: 2, question: '1 + 1', hint: 'Think about 2 and why.',},
-        { answer: 3, question: '2 + 1' , hint: 'Think about 3 and why.',},
-        { answer: 4, question: '2 + 2', hint: 'Think about 4 and why.',},
-        { answer: 5, question: '2 + 3' , hint: 'Think about 5 and why.',},
-        { answer: 6, question: '3 + 3', hint: 'Think about 6 and why.',},
-        { answer: 7, question: '3 + 4', hint: 'Think about 7 and why.',},
-        { answer: 8, question: '4 + 4', hint: 'Think about 8 and why.',},
-        { answer: 9, question: '5 + 4', hint: 'Think about 9 and why.',},
-        { answer: 10, question: '5 + 5', hint: 'Think about 1 and why.0',},
+   game2: [
+         {question: 'What is it called when you listen with your whole body?', answer: 'Active Listening.', },
+         {question: 'When you have a problem, what can you do?', answer: 'Get help from an adult.', },
+         {question: 'When you need to regulate your emotions, what can you do?', answer: 'Do belly breathing', },
+         {question: 'What is it called when you know you are worthy of love?', answer: 'Self-worth.', },
+         {question: 'When you have a problem or conflict with another person, what can you say?', answer: '“I feel ___ when ___”', },
+         {question: 'Who is the person who cares about you and is kind to you?', answer: 'A friend.', },
+         {question: 'What can you do if you feel uncomfortable with someone?', answer: 'Walk away.', },
+         {question: 'What is it called when you understand how another person is feeling?', answer: 'Empathy.', },
+         {question: 'If you speak up and are courageous, what are you?', answer: 'An upstander.', },
+
+      
        ],
- emotion: [
-        { answer: 'Perspective', question:  `This is a positive statement you use to get through struggles (Perspective)`, hint: 'think about .... Perspective'},
-        {answer:'Emotions',question: `This is a positive statement you use... Emotions`, hint: 'think about .... Emotions'}, 
-        {answer:'Agency',question:  `This is a positive statement you use... Agency`, hint: 'think about .... Agency'},                        
-        {answer:'Growth mindset',question:  `This a really long one for testing purposes is a positive statement you use... Growth mindset`, hint: 'think about .... Growth mindset'},
-        {answer:'Teamwork',question:  `This is a positive statement you use... Teamwork`, hint: 'think about .... Teamwork' },                      
-        {answer:'Goals',question: `This is a positive statement you use... Goals`, hint: 'think about .... Goals'},
-        {answer:'Values',question:  `This is a positive statement you use... Values`, hint: 'think about .... Values' },                                                   
-        {answer:'Critical Thinking',question:  `This is a positive statement you use... Critical Thinking`, hint: 'think about .... Critical Thinking'},
-        {answer:'Purpose',question:  `This is a positive statement you use...Purpose`, hint: 'think about .... Purpose'},
+ game3: [
+    {question: 'Who should you show kindness to when you are kind?', answer: 'All people, places, and animals.', },
+    {question: 'What is it called when you are friends with people who are different from you?', answer: 'Diversity.', },
+    {question: 'When we read a book that is similar to our own experience, is that book a window or a mirror?', answer: 'A mirror.', },
+    {question: 'When we read a book that is different from our own experience, is that book a window or a mirror?', answer: 'A window.', },
+    {question: 'When we label a person based on what we think they are like, what are we doing?', answer: 'Using stereotypes.', },
+    {question: 'If you change who you are when you’re with a group of friends, are you fitting in or belonging?', answer: 'Fitting in.', },
+    {question: 'If you are true to who you are when you’re with a group of friends, even if you are different from them, are you fitting in or belonging?', answer: 'Belonging.', },
+    {question: 'What is it called when everyone feels like they belong?', answer: 'Inclusion.', },
+    {question: 'Is it okay to be yourself, even though you are different from other people?', answer: 'Yes!', },
      ],
+     game4: [
+        {question: 'What part of your brain is responsible for making your heartbeat?', answer: 'Downstairs brain.', },
+        {question: 'What part of your brain is responsible for making good decisions?', answer: 'Upstairs brain.', },
+        {question: 'How can you connect your downstairs and upstairs brain when you are feeling big emotions?', answer: 'Breathe.', },
+        {question: 'What does it mean to have balance in our life?', answer: 'To have not too little or not too much of one thing.', },
+        {question: 'What are the benefits of making mistakes?', answer: 'Our brain grows and we learn from them.', },
+        {question: 'What is it called when you find joy and happiness in something?', answer: 'Joy.', },
+        {question: 'What is it called when you want to change the world?', answer: 'Activism.', },
+        {question: 'What is it called when your actions and words affect other people around you?', answer: 'The ripple effect.', },
+        {question: 'Who is someone who stands tall for what they believe in?', answer: 'Leaders.', },
+     ]
 }
+
+
 /*********  CREATING ANSWER DROP DOWN TEXT ******** */
 function generateAnswerDropdown() {
     const answerDropDownText = document.querySelector('.generateAnswerDropDown');
  if (inputBoxType[userSelectedQuestions] === 'number') {
    return answerDropDownText.innerHTML = `<input type="number" name="" class="answerDropDown" max="99" id="numberInput"/>`
- } else if (inputBoxType[userSelectedQuestions] === 'dropDown'){
+ } else {
     let optionArray = []
     questions[userSelectedQuestions].forEach(el =>  {
     optionArray.push(` <option value='${el.answer}'>${el.answer}</option>`)
@@ -258,21 +274,27 @@ function askQuestion() {
 
 function checkAnswer() {
     const answerDropDown = document.querySelector('.answerDropDown').value;
-
+    const correctText = document.querySelector('.correct')
     if (questions[userSelectedQuestions][questionIndex].answer == answerDropDown) {
+        correctText.classList.add('show')
         questionPopUp.classList.remove('show')
- } else {
-        if (wrongAnswerCount <= 1) {
-            wrongAnswerCount += 1;
-             tryAgain.textContent = 'Not quite, try again.'
-        }else if (wrongAnswerCount <= 2) {
-            wrongAnswerCount += 1;
-             tryAgain.textContent = 'Close, try again.'
-    }  else if (wrongAnswerCount <= 3) {
 
-        wrongAnswerCount += 1;
-         tryAgain.textContent = questions[userSelectedQuestions][questionIndex].hint
-        }
+        setTimeout(() => {
+            correctText.classList.remove('show')
+        }, 1000);
+
+ } else {
+        // if (wrongAnswerCount <= 1) {
+        //     wrongAnswerCount += 1;
+        //      tryAgain.textContent = `Sorry, that's not right.`
+        // }else if (wrongAnswerCount <= 2) {
+        //     wrongAnswerCount += 1;
+             tryAgain.textContent = 'Sorry, that’s not right'
+    // }  else if (wrongAnswerCount <= 3) {
+
+    //     wrongAnswerCount += 1;
+        //  tryAgain.textContent = questions[userSelectedQuestions][questionIndex].hint
+        // }
     }
 }
 

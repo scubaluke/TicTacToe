@@ -28,8 +28,11 @@
 </div>
 </div>
 
-<div class="choosePlayersAndGame show">
-    
+
+
+
+<div class="choosePlayersAndGame">
+    <h3 class="directions" >Directions: Pick One Player to play against the computer, or Two Players to play against a friend. When it says Xs, answer the question correctly to gain an X. Then put the X anywhere you want on the Tic-Tac-Toe board. Os will go next by answering the question. If Os gets it correct, they get to place an O on the board. If they get the answer wrong, Xs get to answer the question for a chance to put another X on the board. Be the first to get 3 in a row to win!</h3>
     <div class="customSelect" > 
     <label class="players"  for="players">
         <h3>Players</h3>
@@ -44,9 +47,11 @@
       <label for="game" class="gameToPlay">
           <h3>Game:</h3>
         <select name="game" id="questionsToAsk">
-            <option value="emotion">Emotional Learning</option>
-           <option value="addition">Addition</option>
-              <option value="subtraction">Subtraction</option> 
+            <option value="game1">Game 1</option>
+           <option value="game2">Game 2</option>
+              <option value="game3">Game 3</option> 
+              <option value="game4">Game 4</option> 
+
          </select>
          </label>
     </div>
@@ -76,6 +81,11 @@
     <h2 class="tryAgain"></h2>
 </div>
 
+
+<div class="correct">
+    <h2>You’re right!</h2>
+
+</div>
 
 <div class="winningMessage" id="winningMessage">
     <div data-winning-message-text></div>
