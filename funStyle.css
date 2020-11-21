@@ -14,7 +14,6 @@ body {
   margin: 0;
   background-image: url(./Tic-Tac-ToeBackground.png);
   background-repeat: no-repeat;
-  overflow: auto;
 }
 .fill {
   /* background-color: rgb(255, 218, 124); */
@@ -201,7 +200,7 @@ body {
   opacity: 0;
 
   height: 0;
-  overflow: hidden;
+  overflow: auto;
   position: fixed;
   top: 0;
   left: 0;
@@ -302,14 +301,19 @@ body {
   font-size: 2rem;
 }
 .directions {
-  margin: 8%;
-  margin-bottom: 10px;
+  /* margin: 8%;
+  margin-bottom: 10px; */
+  /* position: absolute; */
+  margin-top: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
+  /* margin: 20px; */
   line-height: 1.6rem;
   padding: 15px;
   border-radius: 5px;
   color: #333;
   background-color: turquoise;
-  box-shadow: 1px 5px 30px rgb(36, 36, 36);
+  box-shadow: 1px 5px 30px rgba(42, 153, 142, 0.795);
 }
 
 .thinking.show {
@@ -322,6 +326,7 @@ body {
   margin-top: 20px;
   /* margin: 80px; */
   /* margin-bottom: 40px; */
+
   padding: 10px 25px;
   border-radius: 50px;
   color: #000;
@@ -336,4 +341,15 @@ body {
   box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
   color: #fff;
   transform: translateY(-7px);
+}
+
+@media only screen and (max-width: 650px) {
+  .directions {
+    margin-top: 330px;
+  }
+  .choosePlayersAndGame button {
+    font-size: 1.3rem;
+    padding: 30px;
+    line-height: 0rem;
+  }
 }
