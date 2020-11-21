@@ -38,7 +38,8 @@ function startGame() {
         cell.addEventListener('click', handleClick, { once: true })
     })
     setBoardHoverClass()
-    winningMessageElement.classList.remove('show')
+    // winningMessageElement.classList.remove('show')
+    fadeOut(winningMessageElement)
     pickedQuestions = [];
     choosePlayersAndGame.classList.add('show')
 
@@ -54,35 +55,41 @@ function computersMove() {
 
         if (move.classList.contains('x') || move.classList.contains('circle')) {
         computersMove(circleTurn)
+
     } else {
         const wait = (amount = 0) => new Promise(resolve => setTimeout(resolve, amount))
-        thinkingText.classList.add('show')
-
+         thinkingText.classList.add('show')
+            // fadeIn(thinkingText)
        async function play(move) {
            const thinking = (Math.random()*1000) +500;
             await wait(thinking)
             move.classList.add('circle')
             if (checkWin(circleClass)) {
                 endGame(false)
-                thinkingText.classList.remove('show')
-
+                 thinkingText.classList.remove('show')
+                // fadeOut(thinkingText)
             } else if (checkWin(xClass)) {
                 endGame(false)
                 thinkingText.classList.remove('show')
+                // fadeOut(thinkingText)
 
              // check for draw
             } else if (isDraw()) {
                        endGame(true)
                    } else {
             //switch turns
+                    //   fadeOut(thinkingText)
+                    thinkingText.classList.remove('show')
                     swapTurns()
                     setBoardHoverClass()
-                    thinkingText.classList.remove('show')
+                    // fadeIn(questionPopUp)
+
           }
        }
        play(move)
     }
-    questionPopUp.classList.add('show')
+    //  questionPopUp.classList.add('show')
+    // fadeIn(questionPopUp)
 
 }
 function handleClick(e) {
@@ -117,7 +124,17 @@ function handleClick(e) {
             swapTurns()
             setBoardHoverClass()
             computersMove(currentClass)
-            questionPopUp.classList.remove('show')
+            if (selectPlayers === 'multi') {          
+                fadeOut(questionPopUp)
+            } else {
+                questionPopUp.style.opacity = '0'
+                questionPopUp.classList.remove('show')
+            // fadeOut(questionPopUp)
+
+            }
+            questionPopUp.style.opacity = '0'
+         questionPopUp.classList.remove('show')
+            // fadeOut(questionPopUp)
         }
     }
 }
@@ -134,7 +151,8 @@ function endGame(draw) {
     } else {
         winningMessageText.innerText = `${circleTurn ? "O's" : "X's"} Wins!`
     }
-    winningMessageElement.classList.add('show')
+    // winningMessageElement.classList.add('show')
+    fadeIn(winningMessageElement)
 }
 
 function placeMark(cell, currentClass) {
@@ -266,7 +284,9 @@ function askQuestion() {
     pickQuestion() 
     generateAnswerDropdown()
     questionText.innerText = questions[userSelectedQuestions][questionIndex].question
-    questionPopUp.classList.add('show')
+    // questionPopUp.classList.add('show')
+    fadeIn(questionPopUp)
+
     wrongAnswerCount = 0;
     tryAgain.textContent = ''
     circleTurn ? playerText.innerText = `Player: O's` :  playerText.innerText = `player: X's`
@@ -276,13 +296,28 @@ function checkAnswer() {
     const answerDropDown = document.querySelector('.answerDropDown').value;
     const correctText = document.querySelector('.correct')
     if (questions[userSelectedQuestions][questionIndex].answer == answerDropDown) {
-        correctText.classList.add('show')
-        questionPopUp.classList.remove('show')
 
-        setTimeout(() => {
-            correctText.classList.remove('show')
-        }, 1000);
+            questionPopUp.style.opacity = '0'
+            correctText.style.display = 'flex'
+            questionPopUp.classList.remove('show')
+console.log(questionPopUp);
+            setTimeout(() => {
+                correctText.style.opacity = '1'
+                console.log(questionPopUp);
 
+            }, 20);
+       
+            setTimeout(() => {
+                console.log(questionPopUp);
+
+                correctText.style.opacity = '0'
+                console.log(questionPopUp);
+
+                setTimeout(() => {
+                    correctText.style.setProperty('display', 'none')
+                }, 500);
+            }, 1500);
+         
  } else {
         // if (wrongAnswerCount <= 1) {
         //     wrongAnswerCount += 1;
@@ -302,19 +337,36 @@ answerBtn.addEventListener('click',checkAnswer)
 restartButton.addEventListener('click', askPlayerNum)
 
 /*******  CSS  TRANSITION ANIMATION HELPER function ************ */
+function fadeIn(element) {
+    element.classList.add('show')
+    console.log(element);
+    setTimeout(() => {
+        element.style.opacity = '1'
+    }, 20);
+}
 
-// var display = function (elem) {
+
+function fadeOut(element) {
+    element.style.opacity = '0'
+
+    setTimeout(() => {
+        element.classList.remove('show')
+
+
+    }, 500);
+}
+//   function fadeIn(elem) {
 
 // 	// Get the natural height of the element
-// 	var getHeight = function () {
+// 	const getHeight = function () {
 // 		elem.style.display = 'block'; // Make it visible
-// 		var height = elem.scrollHeight + 'px'; // Get it's height
+// 		const height = elem.scrollHeight + 'px'; // Get it's height
 // 		elem.style.display = ''; //  Hide it again
 // 		return height;
 // 	};
 
-// 	var height = getHeight(); // Get the natural height
-// 	elem.classList.add('is-visible'); // Make the element visible
+// 	const height = getHeight(); // Get the natural height
+// 	elem.classList.add('show'); // Make the element visible
 // 	elem.style.height = height; // Update the max-height
 
 // 	// Once the transition is complete, remove the inline max-height so the content can scale responsively
@@ -323,3 +375,62 @@ restartButton.addEventListener('click', askPlayerNum)
 // 	}, 350);
 
 // };
+
+// // Hide an element
+//  function hiding(elem) {
+  
+//     if (elem.classList.contains('hidden')) {
+//       elem.classList.remove('hidden');
+//       setTimeout(function () {
+//         elem.classList.remove('visuallyhidden');
+//       }, 20);
+//     } else {
+//       elem.classList.add('visuallyhidden');    
+//       elem.addEventListener('transitionend', function() {
+//         elem.classList.add('hidden');
+//       }, {
+//         capture: false,
+//         once: true,
+//         passive: false
+//       });
+//     }
+    
+//   };
+
+//     function fadeOut(elem) {
+
+// 	// Give the element a height to change from
+// 	elem.style.height = elem.scrollHeight + 'px';
+
+// 	// Set the height back to 0
+// 	window.setTimeout(function () {
+// 		elem.style.height = '0';
+// 	}, 1);
+
+// 	// When the transition is complete, hide it
+// 	window.setTimeout(function () {
+// 		elem.classList.remove('show');
+// 	}, 350);
+
+// };
+// function display(elem) {
+//     elem.style.display = 'flex'
+
+// }
+// function testFade(elem) {
+// //    display(elem)
+
+// elem.style.display = 'flex'
+// setTimeout(() => {
+//     elem.classList.add('show')
+
+// }, 1);
+
+// }
+// function testFadeOut(elem) {
+//     elem.classList.remove('show') 
+//     setTimeout(() => {
+//         elem.style.display = 'none'
+
+//     }, 1000);
+// }

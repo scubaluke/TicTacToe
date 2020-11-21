@@ -6,16 +6,19 @@
   box-sizing: border-box;
 }
 :root {
-  --cell-size: 100px;
+  --cell-size: 140px;
   --mark-size: calc(var(--cell-size) * 0.9);
 }
 body {
   font-family: "Source Sans Pro", sans-serif;
   margin: 0;
-  background-image: url(./color.jpg);
+  background-image: url(./Tic-Tac-ToeBackground.png);
+  background-repeat: no-repeat;
+  overflow: auto;
 }
 .fill {
-  background-color: rgb(238, 255, 0);
+  /* background-color: rgb(255, 218, 124); */
+  opacity: 0.2;
   border-radius: 5px;
   height: 450px;
   width: 500px;
@@ -23,18 +26,18 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%); /* IE 9 */
-  -webkit-transform: translate(-50%, -50%); /* Chrome, Safari, Opera */
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
 }
-.wrapper {
+/* .wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%); /* IE 9 */
-  -webkit-transform: translate(-50%, -50%); /* Chrome, Safari, Opera */
-}
-.container {
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+} */
+/* .container {
   width: 500px;
   height: 450px;
   border-radius: 5px;
@@ -42,11 +45,11 @@ body {
   border: 1px solid #888;
   display: flex;
   justify-content: center;
-}
+} */
 .board {
-  padding: 30px;
-  width: 400px;
-  height: 400px;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
   display: grid;
   justify-content: center;
   align-content: center;
@@ -58,7 +61,6 @@ body {
 .cell {
   width: var(--cell-size);
   height: var(--cell-size);
-  /* background-color: coral; */
   border: 1px solid black;
   display: flex;
   justify-content: center;
@@ -139,7 +141,7 @@ body {
 }
 
 .winningMessage {
-  /* transition: ease-in 3s; */
+  transition: ease-in-out 350ms;
   display: none;
   position: fixed;
   top: 0;
@@ -165,10 +167,9 @@ body {
   color: white;
   border-color: white;
 }
-.winningMessage.show {
+/* .winningMessage.show {
   display: flex;
-  max-height: 999em;
-}
+} */
 
 /*******   SELECT PLAYERS AND GAME   *****************/
 .choosePlayersAndGame {
@@ -183,7 +184,7 @@ body {
   justify-content: center;
   align-items: center;
   color: white;
-
+  overflow: auto;
   /* font-size: 5rem; */
 }
 /*******   PRE GAME QUESTION POPUP *****************/
@@ -195,8 +196,12 @@ body {
   border-radius: 5px;
 }
 .questionPopUp {
-  transition: ease-in 1s;
-  display: none;
+  transition: ease-in 350ms;
+  /* display: none; */
+  opacity: 0;
+
+  height: 0;
+  overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
@@ -208,8 +213,10 @@ body {
   align-items: center;
   text-align: center;
   color: white;
+}
 
-  /* font-size: 5rem; */
+.opacityOne {
+  opacity: 1;
 }
 .questionText {
   margin: 15px;
@@ -221,8 +228,9 @@ body {
   color: rgb(255, 73, 73);
 }
 .correct {
-  transition: ease-in 1s;
+  transition: ease-in-out 350ms;
   display: none;
+  opacity: 0;
   position: fixed;
   top: 0;
   left: 0;
@@ -237,10 +245,9 @@ body {
   color: turquoise;
 }
 .show {
+  transition: ease-in 350ms;
+  height: auto;
   display: flex;
-  /* z-index: 99; */
-  overflow: auto;
-  max-height: 999em;
 }
 .customSelect select {
   padding: 20px;
@@ -280,8 +287,7 @@ body {
 }
 /***********  SELECT PLAYERS AND GAME  ********************/
 .thinking {
-  transition: height 1s ease-in-out;
-  height: 0;
+  transition: 1s ease-in-out;
   display: none;
   position: fixed;
   top: 0;
@@ -297,13 +303,18 @@ body {
 }
 .directions {
   margin: 8%;
+  margin-bottom: 10px;
   line-height: 1.6rem;
-  color: #ddd;
+  padding: 15px;
+  border-radius: 5px;
+  color: #333;
+  background-color: turquoise;
+  box-shadow: 1px 5px 30px rgb(36, 36, 36);
 }
+
 .thinking.show {
   display: flex;
   z-index: 100;
-  height: auto;
 }
 .choosePlayersAndGame button {
   display: inline-flex;
