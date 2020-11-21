@@ -12,14 +12,18 @@
 body {
   font-family: "Source Sans Pro", sans-serif;
   margin: 0;
+  /* background-image: url(./backgroundLarge.jpeg); */
   background-image: url(./Tic-Tac-ToeBackground.png);
   background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
+
 .fill {
   /* background-color: rgb(255, 218, 124); */
   opacity: 0.2;
   border-radius: 5px;
-  height: 450px;
+  height: 500px;
   width: 500px;
   position: absolute;
   top: 50%;
@@ -28,23 +32,7 @@ body {
   -ms-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
 }
-/* .wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-} */
-/* .container {
-  width: 500px;
-  height: 450px;
-  border-radius: 5px;
-  background-color: #ffffff99;
-  border: 1px solid #888;
-  display: flex;
-  justify-content: center;
-} */
+
 .board {
   overflow: hidden;
   width: 100vw;
@@ -218,7 +206,7 @@ body {
   opacity: 1;
 }
 .questionText {
-  margin: 15px;
+  margin: 25px;
 }
 /* .answerDropDown */
 .tryAgain {
@@ -305,15 +293,15 @@ body {
   margin-bottom: 10px; */
   /* position: absolute; */
   margin-top: 100px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
   /* margin: 20px; */
   line-height: 1.6rem;
   padding: 15px;
   border-radius: 5px;
   color: #333;
   background-color: turquoise;
-  box-shadow: 1px 5px 30px rgba(42, 153, 142, 0.795);
+  box-shadow: 1px 5px 10px rgba(42, 153, 142, 0.795);
 }
 
 .thinking.show {
@@ -351,5 +339,8 @@ body {
     font-size: 1.3rem;
     padding: 30px;
     line-height: 0rem;
+  }
+  .questionText {
+    margin: 15px;
   }
 }
