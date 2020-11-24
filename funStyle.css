@@ -20,8 +20,20 @@ body {
 }
 
 .fill {
-  /* background-color: rgb(255, 218, 124); */
-  opacity: 0.2;
+  background-color: rgb(0, 255, 76);
+  border-radius: 5px;
+  height: 500px;
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+}
+.white {
+  background-color: #fff;
+  opacity: 0.5;
   border-radius: 5px;
   height: 500px;
   width: 500px;
@@ -168,7 +180,7 @@ body {
   bottom: 0;
   background-color: rgb(0, 0, 0, 0.65);
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   color: white;
   overflow: auto;
@@ -272,7 +284,7 @@ body {
   color: #fff;
   transform: translateY(-7px);
 }
-/***********  SELECT PLAYERS AND GAME  ********************/
+/***********  "COMPUTER THINKING" SINGLE PLAYER  ********************/
 .thinking {
   transition: 1s ease-in-out;
   display: none;
@@ -288,26 +300,28 @@ body {
   color: rgb(223, 126, 91);
   font-size: 2rem;
 }
+.thinking.show {
+  display: flex;
+  z-index: 100;
+}
+/***********  SELECT PLAYERS AND GAME  ********************/
 .directions {
   /* margin: 8%;
   margin-bottom: 10px; */
   /* position: absolute; */
-  margin-top: 100px;
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-top: 80px;
+  margin-left: 145px;
+  margin-right: 145px;
   /* margin: 20px; */
-  line-height: 1.6rem;
-  padding: 15px;
+  line-height: 1.9rem;
+  font-size: 1.4rem;
+  padding: 45px;
   border-radius: 5px;
   color: #333;
   background-color: turquoise;
   box-shadow: 1px 5px 10px rgba(42, 153, 142, 0.795);
 }
 
-.thinking.show {
-  display: flex;
-  z-index: 100;
-}
 .choosePlayersAndGame button {
   display: inline-flex;
   text-align: center;
@@ -333,7 +347,10 @@ body {
 
 @media only screen and (max-width: 650px) {
   .directions {
-    margin-top: 330px;
+    /* position: relative; */
+    margin: 20px;
+
+    padding: 5px;
   }
   .choosePlayersAndGame button {
     font-size: 1.3rem;

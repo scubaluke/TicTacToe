@@ -117,7 +117,7 @@ function handleClick(e) {
       swapTurns();
       setBoardHoverClass();
     }
-  } else if (selectPlayers === 'single' && currentClass == 'x') {
+  } else if (selectPlayers === 'single' && currentClass === 'x') {
     placeMark(cell, currentClass);
 
     if (checkWin(currentClass)) {
@@ -178,13 +178,32 @@ function checkWin(currentClass) {
     )
   );
 }
+const selectQuestions = document.querySelector('#questionsToAsk');
+
 function setBackground() {
-  const randomColor = Math.floor(Math.random() * 16777215).toString(16);
   const background = document.querySelector('.fill');
-  background.style.backgroundColor = `#${randomColor}`;
+  switch (selectQuestions.value) {
+    case 'game1':
+      background.style.backgroundColor = 'blue';
+      break;
+    case 'game2':
+      background.style.backgroundColor = 'purple';
+      break;
+    case 'game3':
+      background.style.backgroundColor = 'orange';
+      break;
+    case 'game4':
+      background.style.backgroundColor = 'green';
+      break;
+    default:
+      background.style.backgroundColor = 'yellow';
+  }
+  // background.style.backgroundColor = `#${randomColor}`;
+  // const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 }
 
 restartButton.addEventListener('click', startGame);
+selectQuestions.addEventListener('change', setBackground);
 restartButton.addEventListener('click', setBackground);
 setBackground();
 
@@ -198,7 +217,6 @@ let questionIndex = 0;
 let wrongAnswerCount = 0;
 const chooseGameAndPlayers = document.querySelector('.choosePlayersAndGame');
 /** *****    SELECT QUESTIONS FOR GAME **** */
-const selectQuestions = document.querySelector('#questionsToAsk');
 let userSelectedQuestions = '';
 
 function findUserSelectedQuestions() {
