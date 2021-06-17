@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="./funStyle.css">
+</head>
+<body>
+  
+
+    <div class="thinking ">
+        <h1 >Computer Thinking...</h1>
+</div>
+
+    <div class="fill">
+         <div class="white"></div>
+    </div>
+   
+<div id="board" class="board">
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+    <div class="cell" data-cell ></div>
+</div>
+
+
+
+
+
+
+<div class="choosePlayersAndGame">
+    <h3 class="directions" >Directions: Pick One Player to play against the computer, or Two Players to play against a friend. When it says Xs, answer the question correctly to gain an X. Then put the X anywhere you want on the Tic-Tac-Toe board. Os will go next by answering the question. If Os gets it correct, they get to place an O on the board. If they get the answer wrong, Xs get to answer the question for a chance to put another X on the board. Be the first to get 3 in a row to win!</h3>
+    <div class="customSelect" > 
+    <label class="players"  for="players">
+        <h3>Players</h3>
+        <select  name="players" id="players">
+            <option value="multi">Two Player</option>
+            <option value="single">Single Player</option>
+        </select>
+    </label>
+</div>
+
+    <div class="customSelect" > 
+      <label for="game" class="gameToPlay">
+          <h3>Game:</h3>
+        <select name="game" id="questionsToAsk">
+            <option value="game1">Identify & Mindset</option>
+           <option value="game2">Courage & Kindness</option>
+              <option value="game3">A Place to Belong</option> 
+              <option value="game4">A Healthy Well-being</option> 
+
+         </select>
+         </label>
+    </div>
+    <button id="startGame">Play!</button>
+
+</div>
+
+<div class="questionPopUp">
+    <div class="whosTurn"></div>
+<h1 class="questionText">This is a positive statement you use to get through struggles</h1>
+<div class="customSelect"> 
+    <div class="generateAnswerDropDown"></div>
+<!-- <select class="answerDropDown" name="answer" id="">
+    <option disabled selected>Select</option>
+    <option value='Perspective'>Perspective</option>
+    <option value='Agency'>Agency</option>
+    <option value=Purpose>Purpose</option>
+    <option value='Growth mindset'>Growth mindset</option>
+    <option value='Emotions'>Emotions</option>
+    <option value='Goals'>Goals</option>
+    <option value='Values'>Values</option>
+    <option value='Teamwork'>Teamwork</option>
+    <option value='Critical Thinking'>Critical Thinking</option> -->
+</select>
+</div>
+    <button class="answerBtn">Answer</button>
+    <h2 class="tryAgain"></h2>
+</div>
+
+
+<div class="correct">
+    <h2>You’re right!</h2>
+
+</div>
+
+<div class="winningMessage" id="winningMessage">
+    <div data-winning-message-text></div>
+    <button id="restart">Play Again</button>
+</div>
+
+    <script src="./index.js"></script>
+</body>
+</html>
