@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+
 *,
 *::after,
 *::before {
@@ -8,11 +10,43 @@
   --mark-size: calc(var(--cell-size) * 0.9);
 }
 body {
+  font-family: "Source Sans Pro", sans-serif;
   margin: 0;
+  background-image: url(./color.jpg);
+}
+.fill {
+  background-color: rgb(238, 255, 0);
+  border-radius: 5px;
+  height: 450px;
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%); /* IE 9 */
+  -webkit-transform: translate(-50%, -50%); /* Chrome, Safari, Opera */
+}
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%); /* IE 9 */
+  -webkit-transform: translate(-50%, -50%); /* Chrome, Safari, Opera */
+}
+.container {
+  width: 500px;
+  height: 450px;
+  border-radius: 5px;
+  background-color: #ffffff99;
+  border: 1px solid #888;
+  display: flex;
+  justify-content: center;
 }
 .board {
-  width: 100vw;
-  height: 100vh;
+  padding: 30px;
+  width: 400px;
+  height: 400px;
   display: grid;
   justify-content: center;
   align-content: center;
@@ -54,16 +88,17 @@ body {
 .cell.circle {
   cursor: not-allowed;
 }
+/* .cell.circle::before, */
+/* .cell.circle::after, */
 .cell.x::before,
-.cell.x::after,
-.cell.circle::before,
-.cell.circle::after {
+.cell.x::after {
   background-color: black;
 }
 .board.x .cell:not(.x):not(.circle):hover::before,
 .board.x .cell:not(.x):not(.circle):hover::after,
 .board.circle .cell:not(.x):not(.circle):hover::before {
-  background-color: lightgray;
+  /* background-color: rgb(122, 122, 236); */
+  background-color: black;
 }
 .cell.x::before,
 .cell.x::after,
@@ -84,11 +119,13 @@ body {
 }
 .cell.circle::before,
 .cell.circle::after,
-.board.circle .cell:not(.x):not(.circle):hover::before,
 .board.circle .cell:not(.x):not(.circle):hover::after {
+  /* .board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after { */
   content: "";
   position: absolute;
   border-radius: 50%;
+  border: 15px solid black;
 }
 .cell.circle::before,
 .board.circle .cell:not(.x):not(.circle):hover::before {
@@ -97,10 +134,10 @@ body {
 }
 .cell.circle::after,
 .board.circle .cell:not(.x):not(.circle):hover::after {
-  width: calc(var(--mark-size) * 0.7);
-  height: calc(var(--mark-size) * 0.7);
-  background-color: white;
+  width: calc(var(--mark-size));
+  height: calc(var(--mark-size));
 }
+
 .winningMessage {
   display: none;
   position: fixed;
@@ -108,7 +145,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgb(0, 0, 0, 0.9);
+  background-color: rgb(0, 0, 0, 0.65);
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -126,4 +163,7 @@ body {
   background-color: black;
   color: white;
   border-color: white;
+}
+.winningMessage.show {
+  display: flex;
 }

@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./funStyle.css">
 </head>
-<body>        
-    <div class="thinking ">
-        <h1 >Computer Thinking...</h1>
-</div>
-    <p>player's:</p>
-    <select name="players" class="players" id="">
-        <option value="single">single</option>
-        <option value="multi">multi</option>
-    </select>
+<body>
+    <label class="players"  for="players">
+        <select name="players" id="players">
+            <option value="multi">Two Player</option>
+            <option value="one">Single Player</option>
+        </select>
+    
+    </label>
     <div class="fill"></div>
     <div class="wrapper">
     <div class="container">
@@ -36,6 +35,6 @@
     <button id="restart">Play Again</button>
 </div>
 
-    <script src="./test.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>
